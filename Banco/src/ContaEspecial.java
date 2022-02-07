@@ -5,7 +5,7 @@ public class ContaEspecial extends Conta{
 	private final String atendimento = "Com prioridade";
 	private double chequeEspecial;
 
-	//declaração do construtor da super classe e modificando o construtor
+	//declaraÃ§Ã£o do construtor da super classe e modificando o construtor
 	public ContaEspecial(String titular, int numero, double saldo, double chequeEspecial) {
 		super(titular, numero, saldo);
 		this.chequeEspecial = chequeEspecial;
@@ -14,8 +14,8 @@ public class ContaEspecial extends Conta{
 	//chamando os metodos e rotinas da super
 	public void dados() {
 		super.dados();
-		System.out.println("Seu atendimento é: " + getAtendimento());
-		System.out.println("Limite do Cheque Especial é: " + getChequeEspecial());
+		System.out.println("Seu atendimento Ã©: " + getAtendimento());
+		System.out.println("Limite do Cheque Especial Ã©: " + getChequeEspecial());
 	}
 	
 	
@@ -23,7 +23,7 @@ public class ContaEspecial extends Conta{
 	//getters e setters
 	public void setChequeEspecial(double chequeEspecial) {
 		this.chequeEspecial = chequeEspecial;
-		System.out.println("O valor do Cheque Especial é: " + getChequeEspecial());
+		System.out.println("O valor do Cheque Especial Ã©: " + getChequeEspecial());
 	}
 	
 	public double getChequeEspecial() {
@@ -39,30 +39,34 @@ public class ContaEspecial extends Conta{
 	public void sacar(double valor) {
 		if (this.getSaldo() >= valor) {
 			this.saldo -= valor;
-			System.out.println("Você sacou: " + valor + " Seu saldo é: " + getSaldo());
+			System.out.println("VocÃª sacou: " + valor + " Seu saldo Ã©: " + getSaldo());
 		}else if(this.getSaldo() + this.getChequeEspecial() >= valor) {
-			System.out.println("Você entrará no seu limite especial");
+			System.out.println("VocÃª entrarÃ¡ no seu limite especial");
 			this.chequeEspecial -= (valor - this.getSaldo());
 			this.saldo -= valor;
-			System.out.println("Seu saldo é: " + saldo + " Seu limite especial é: " + getChequeEspecial());	
+			System.out.println("Seu saldo Ã©: " + saldo + " Seu limite especial Ã©: " + getChequeEspecial());	
 		}	
 		else {
-			System.out.println("Seu saldo e Limite especial são insuficientes");
+			System.out.println("Seu saldo e Limite especial sÃ£o insuficientes");
 		}
 	}
 	
 	//metodo para depositar
-	public void depositar(double valor) {
+		public void depositar(double valor) {
 		System.out.println("---------" + this.getTitular() + "------------");
-		if(valor == 0) {
-			System.out.println("Deposite um valor válido");
-		}else if(this.getSaldo() > 0) {
+		if(valor <= 0) {
+			System.out.println("Depositar um valor valor vÃ¡lido");
+		}else if(this.getSaldo() > 0){
+			this.saldo += valor; 
+		System.out.println("Deposito feito com sucesso! \nSeu saldo Ã© R$: " + this.saldo);
+		}else if(valor < Math.abs(this.saldo)){	
+			this.chequeEspecial += valor;
 			this.saldo += valor;
-			System.out.println("Seu saldo é: " + getSaldo());
+			System.out.println("!!!Seu saldo Ã© R$: " + getSaldo() + " O valor do seu Cheque Especial Ã© R$:" +getChequeEspecial());
 		}else{
 			this.chequeEspecial += Math.abs(this.saldo);
 			this.saldo += valor;
-			System.out.println("Seu saldo é: " + getSaldo() + " O valor do seu Cheque Especial é:" +getChequeEspecial());
+			System.out.println("xxxSeu saldo Ã© R$: " + getSaldo() + " O valor do seu Cheque Especial Ã© R$:" +getChequeEspecial());
 		}
 }
 
